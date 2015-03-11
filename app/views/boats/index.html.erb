@@ -1,0 +1,11 @@
+<h2>Overview boats</h2>
+
+<ul>
+	<% @boats.each do |boat| %>
+		<li>
+			<%= link_to boat.title, boat %>
+		</li>
+	<% end %>
+</ul>
+
+<%= link_to "New boat", new_boat_path %> 

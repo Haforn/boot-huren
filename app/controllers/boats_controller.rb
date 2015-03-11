@@ -1,6 +1,6 @@
 class BoatsController < ApplicationController 
 
-	before_action :set_boat, only: [:show]
+	before_action :set_boat, only: [:show, :edit, :update]
 
 	def index
 		@boats = Boat.all
@@ -16,11 +16,22 @@ class BoatsController < ApplicationController
 	def create
 		@boat = Boat.new(boat_params)
 		if @boat.save
-			redirect_to boat_path(:id => @boat.id), notice: "Uw boat is toegevoegd!"
+			redirect_to boat_path(:id => @boat.id), notice: "Your boat has been added!"
 		else
 			render 'new'
 		end
 	end
+
+	def edit
+	end
+
+	def update
+		if @boat.update_attributes(boat_params)
+			redirect_to boat_path(:id => @boat.id), notice: "Your boat has been updated"
+		else
+			render 'edit'
+		end
+	end 
 
 	private
 

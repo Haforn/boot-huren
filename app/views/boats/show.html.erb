@@ -1,5 +1,9 @@
 <%= link_to "Back to boat list", boats_path %>
 
 <h2>Detail boat</h2>
-
-<%= @boat.title %>
+<ul>
+	<li>
+		<%= @boat.title %>
+	</li>
+</ul>
+<%= link_to "Edit boat", edit_boat_path %>

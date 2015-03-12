@@ -1,0 +1,11 @@
+<%= form_for @user_profile do |f| %>
+	
+	<%= f.label :first_name %>
+	<%= f.text_field :first_name %>
+
+	<%= f.label :last_name %>
+	<%= f.text_field :last_name %>
+
+	<%= submit_tag 'Edit profile', data: { disable_with: 'Aan het versturen...'} %>
+
+<% end %>

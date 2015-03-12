@@ -1,6 +1,6 @@
 class BoatsController < ApplicationController 
 
-	before_action :set_boat, only: [:show, :edit, :update]
+	before_action :set_boat, only: [:show, :edit, :update, :delete, :destroy]
 
 	def index
 		@boats = Boat.all
@@ -32,6 +32,14 @@ class BoatsController < ApplicationController
 			render 'edit'
 		end
 	end 
+
+	def delete
+	end
+
+	def destroy
+		@boat.destroy
+		redirect_to boats_path, notice: "Your boat has been deleted" 
+	end
 
 	private
 

@@ -1,3 +1,15 @@
-<h2>Edit your boat</h2>
+<div class="col-1">
+	<h2>Edit your boat</h2>
+</div>
 
-<%= render 'form' %>
+<div class="col-2">
+	<%= render 'form' %>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="col-2 col-right">
+	<div class="col-4 col-right">
+		<%= link_to "Delete boat", delete_boat_path, :class => 'btn btn-default' %> 
+	</div>
+</div>

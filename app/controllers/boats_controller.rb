@@ -1,5 +1,6 @@
 class BoatsController < ApplicationController 
 
+	before_action :confirm_logged_in, :except => [:show, :index]
 	before_action :set_boat, only: [:show, :edit, :update, :delete, :destroy]
 
 	def index

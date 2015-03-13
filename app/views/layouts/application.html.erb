@@ -5,17 +5,22 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 </head>
 <body>
 
-<% if !flash[:notice].blank? %> 
-	<p class="notice">
-		<%= flash[:notice] %>
-	</p>
-<% end %>
+<div class="container">
+	<%= render '/partials/flash' %>
 
+	<%= render '/partials/menu' %>
 
-<%= yield %>
+	<div class="clearfix"></div>
+	
+	<%= yield %>
+	
+
+</div>
 
 </body>
 </html>

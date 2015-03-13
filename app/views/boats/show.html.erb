@@ -1,15 +1,17 @@
-<%= link_to "Back to boat list", boats_path %>
+<%# link_to "Back to boat list", boats_path %>
 
-<h2>Detail boat</h2>
-<ul>
-	<li>
-		<%= @boat.title %>
-	</li>
-</ul>
-<%= link_to "Edit boat", edit_boat_path %> 
+<div class="col-1">
+	<h2>Detail boat</h2>
+</div>
 
-<br>
+<div class="col-2">
 
-<%= link_to "Delete boat", delete_boat_path %> 
+	<ul>
+		<li>
+			<%= @boat.title %>
+		</li>
+	</ul>
+	
+	<%= link_to "Edit boat", edit_boat_path, :class => 'btn btn-default' %> 
+</div>
 
-<br> 

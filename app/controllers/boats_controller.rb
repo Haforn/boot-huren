@@ -1,10 +1,15 @@
 class BoatsController < ApplicationController 
 
-	before_action :confirm_logged_in, :except => [:show, :index]
-	before_action :set_boat, only: [:show, :edit, :update, :delete, :destroy]
+	before_action :confirm_logged_in, except: [:show, :index]
+	before_action :set_boat, except: [:index, :my_boats, :new, :create]
+	before_action :check_if_owner, only: [:edit, :update, :delete, :destroy]
 
 	def index
 		@boats = Boat.all
+	end
+
+	def my_boats
+		@my_boats = Boat.where(:user_id => @current_user.id)
 	end
 
 	def show
@@ -45,11 +50,17 @@ class BoatsController < ApplicationController
 	private
 
 		def set_boat
-			@boat = Boat.find(params[:id])
+			@boat = Boat.find(params[:id])	
 		end
 
 		def boat_params 
-		 	params.require(:boat).permit(:title)
+		 	params.require(:boat).permit(:title).merge(user_id: @current_user.id)
+		end
+
+		def check_if_owner 
+			if @current_user.id != @boat.user_id
+				redirect_to my_boats_path, notice: "Only edit your own boats"
+			end
 		end
 
 end 

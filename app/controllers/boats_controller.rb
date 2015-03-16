@@ -98,6 +98,8 @@ class BoatsController < ApplicationController
 		end
 
 		def check_if_in_favorites
-			@is_in_favorites = MyFavorite.where(:user_id => @current_user.id, :boat_id => @boat.id)
+			if @current_user
+				@is_in_favorites = MyFavorite.where(:user_id => @current_user.id, :boat_id => @boat.id)
+			end
 		end
 end

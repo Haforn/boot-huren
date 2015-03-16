@@ -6,6 +6,7 @@ class MyFavoritesController < ApplicationController
 
 	def create
 		@my_favorite = MyFavorite.new(my_favorite_params)
+		@my_favorite.save
 	end
 
 	private

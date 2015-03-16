@@ -25,6 +25,15 @@ class BoatsController < ApplicationController
 	end
 
 	def show
+		@my_favorite = MyFavorite.new
+	end
+
+	def add_as_favorite 
+		@my_favorite = MyFavorite.new
+		@my_favorite.boat_id = @boat.id
+		@my_favorite.user_id = @current_user.id
+		@my_favorite.save
+		redirect_to boat_path(:id => @boat.id)
 	end
 
 	def new
@@ -74,5 +83,4 @@ class BoatsController < ApplicationController
 				redirect_to my_boats_path, notice: "Only edit your own boats"
 			end
 		end
-
 end

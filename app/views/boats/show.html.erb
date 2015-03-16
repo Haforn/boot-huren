@@ -11,8 +11,12 @@
 			<%= @boat.title %>
 		</li>
 	</ul>
-
-	<%= link_to "Add to favorites", add_as_favorite_path %>
+	
+	<% if @is_in_favorites.length == 0 %>
+		<%= link_to "Add to favorites", add_as_favorite_path %>
+	<% else %>
+		<%= link_to "Remove from favorites", add_as_favorite_path %>
+	<% end %>
 
 </div>
 

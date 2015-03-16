@@ -3,7 +3,7 @@ class BoatsController < ApplicationController
 	before_action :confirm_logged_in, except: [:show, :index]
 	before_action :set_boat, except: [:index, :my_boats, :new, :create]
 	before_action :check_if_owner, only: [:edit, :update, :delete, :destroy]
-	before_action :my_favorites, only: [:index]
+	before_action :my_favorites, only: [:index, :my_boats]
 	before_action :check_if_in_favorites, only: [:add_as_favorite, :show]
 
 	def index

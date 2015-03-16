@@ -3,21 +3,10 @@ class BoatsController < ApplicationController
 	before_action :confirm_logged_in, except: [:show, :index]
 	before_action :set_boat, except: [:index, :my_boats, :new, :create]
 	before_action :check_if_owner, only: [:edit, :update, :delete, :destroy]
+	before_action :my_favorites, only: [:index]
 
 	def index
 		@boats = Boat.all
-		
-		# Getting back my favorite boats
-		@my_favorites = MyFavorite.where(:user_id => @current_user.id)
-
-		@my_favorite_array = Array.new
-
-		@my_favorites.each do |my_favorite|
-			@my_favorite_array << my_favorite.boat_id
-		end
-
-		@my_favorite_boats = Boat.find(@my_favorite_array)
-
 	end
 
 	def my_boats
@@ -64,6 +53,10 @@ class BoatsController < ApplicationController
 	end
 
 	def destroy
+		@all_favorites = MyFavorite.where(:boat_id => @boat.id)
+		@all_favorites.each do |favorite|
+			favorite.destroy
+		end 
 		@boat.destroy
 		redirect_to boats_path, notice: "Your boat has been deleted"
 	end
@@ -81,6 +74,20 @@ class BoatsController < ApplicationController
 		def check_if_owner
 			if @current_user.id != @boat.user_id
 				redirect_to my_boats_path, notice: "Only edit your own boats"
+			end
+		end
+
+		def my_favorites	# Getting back my favorite boats
+			if @current_user
+				@my_favorites = MyFavorite.where(:user_id => @current_user.id)
+
+				@my_favorite_array = Array.new
+
+				@my_favorites.each do |my_favorite|
+					@my_favorite_array << my_favorite.boat_id
+				end
+
+				@my_favorite_boats = Boat.find(@my_favorite_array)
 			end
 		end
 end

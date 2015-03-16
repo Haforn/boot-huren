@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get '/login', to: 'access#login', as: 'login'
   get '/logout', to: 'access#logout', as: 'logout'
 
-  match ':controller(/:action)(/:id)', :via => [:get, :post]
+  #match ':controller(/:action)(/:id)', :via => [:get, :post]
 
   #resources :access
 

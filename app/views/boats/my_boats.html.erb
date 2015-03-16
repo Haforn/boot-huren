@@ -5,6 +5,6 @@
 <% @my_boats.each do |boat| %>
 	<div class="col-2">
 		<%= link_to boat.title, boat_path(boat.id) %>
-		<%= link_to "Edit boat", edit_boat_path(boat.id), :class => 'btn btn-default' %> 
+		<%= link_to "Edit boat", edit_boat_path(boat.id), :class => 'btn btn-default' %>
 	</div>
 <% end %>

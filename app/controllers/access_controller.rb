@@ -1,4 +1,4 @@
-class AccessController < ApplicationController 
+class AccessController < ApplicationController
 
   before_action :confirm_logged_in, :except => [:login, :attempt_login, :logout]
 
@@ -22,7 +22,7 @@ class AccessController < ApplicationController
       session[:user_id] = authorired_user.id
       session[:username] = authorired_user.username
   		redirect_to boats_path
-  	else 
+  	else
   		redirect_to login_path
   	end
   end

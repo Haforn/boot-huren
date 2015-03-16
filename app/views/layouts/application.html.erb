@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>BootHuren</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <!-- Latest compiled and minified CSS -->
@@ -13,13 +13,11 @@
 <div class="container">
 	<%= render '/partials/flash' %>
 
-	<%= render '/partials/menu' %>
+	<%= render '/partials/menu', :current_user => @current_user %>
 
 	<div class="clearfix"></div>
-	
-	<%= yield %>
-	
 
+	<%= yield %>
 </div>
 
 </body>

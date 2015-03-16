@@ -1,0 +1,10 @@
+<div class="col-2 col-right">
+	<h4>My favorites</h4>
+	<ul>
+		<% @my_favorite_boats.each do |my_favorite_boat| %>
+			<li>
+				<%= link_to my_favorite_boat.title, boat_path(my_favorite_boat.id) %>
+			</li>
+		<% end %>
+	</ul>
+</div>

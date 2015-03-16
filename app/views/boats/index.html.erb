@@ -1,12 +1,26 @@
-<h2>Overview boats</h2>
+<div class="col-1">
+	<h2>Overview boats</h2>
+</div>
 
-<ul>
-	<% @boats.each do |boat| %>
-		<li>
-			<%= link_to boat.title, boat %>
-		</li>
-	<% end %>
-</ul>
+<div class="col-2">
+	<ul>
+		<% @boats.each do |boat| %>
+			<li>
+				<%= link_to boat.title, boat %>
+			</li>
+		<% end %>
+	</ul>
 
-<%= link_to "New boat", new_boat_path, :class => 'btn btn-default' %> 
+	<%= link_to "New boat", new_boat_path, :class => 'btn btn-default' %>
+</div>
 
+<div class="col-2 col-right">
+	<h4>My favorites</h4>
+	<ul>
+		<% @my_favorite_boats.each do |my_favorite_boat| %>
+			<li>
+				<%= link_to my_favorite_boat.title, boat_path(my_favorite_boat.id) %>
+			</li>
+		<% end %>
+	</ul>
+</div>

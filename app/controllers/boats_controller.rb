@@ -1,4 +1,4 @@
-class BoatsController < ApplicationController 
+class BoatsController < ApplicationController
 
 	before_action :confirm_logged_in, except: [:show, :index]
 	before_action :set_boat, except: [:index, :my_boats, :new, :create]
@@ -6,6 +6,18 @@ class BoatsController < ApplicationController
 
 	def index
 		@boats = Boat.all
+		
+		# Getting back my favorite boats
+		@my_favorites = MyFavorite.where(:user_id => @current_user.id)
+
+		@my_favorite_array = Array.new
+
+		@my_favorites.each do |my_favorite|
+			@my_favorite_array << my_favorite.boat_id
+		end
+
+		@my_favorite_boats = Boat.find(@my_favorite_array)
+
 	end
 
 	def my_boats
@@ -13,7 +25,7 @@ class BoatsController < ApplicationController
 	end
 
 	def show
-	end 
+	end
 
 	def new
 		@boat = Boat.new
@@ -37,30 +49,30 @@ class BoatsController < ApplicationController
 		else
 			render 'edit'
 		end
-	end 
+	end
 
 	def delete
 	end
 
 	def destroy
 		@boat.destroy
-		redirect_to boats_path, notice: "Your boat has been deleted" 
+		redirect_to boats_path, notice: "Your boat has been deleted"
 	end
 
 	private
 
 		def set_boat
-			@boat = Boat.find(params[:id])	
+			@boat = Boat.find(params[:id])
 		end
 
-		def boat_params 
-		 	params.require(:boat).permit(:title).merge(user_id: @current_user.id)
+		def boat_params
+			params.require(:boat).permit(:title).merge(user_id: @current_user.id)
 		end
 
-		def check_if_owner 
+		def check_if_owner
 			if @current_user.id != @boat.user_id
 				redirect_to my_boats_path, notice: "Only edit your own boats"
 			end
 		end
 
-end 
+end

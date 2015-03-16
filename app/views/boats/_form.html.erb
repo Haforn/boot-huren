@@ -1,5 +1,5 @@
 
-<%= form_for @boat do |f| %>
+<%= form_for boat do |f| %>
 	<div class="form-group">
 		<%= f.label :title %>
 		<%= f.text_field :title, :class => 'form-control' %>
@@ -7,4 +7,4 @@
 
 	<%= f.submit nil, :class => 'btn btn-default', data: { disable_with: 'Aan het versturen...' } %>
 
-<% end %>	
+<% end %>

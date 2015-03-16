@@ -1,3 +1,3 @@
-class Access < ActiveRecord::Base 
+class Access < ActiveRecord::Base
 
 end

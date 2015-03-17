@@ -18,7 +18,7 @@ class BoatsController < ApplicationController
 		@my_favorite = MyFavorite.new
 	end
 
-	def add_as_favorite 
+	def add_as_favorite
 		if @is_in_favorites.length == 0
 			@my_favorite = MyFavorite.new(:user_id => @current_user.id, :boat_id => @boat.id)
 			@my_favorite.save
@@ -62,7 +62,7 @@ class BoatsController < ApplicationController
 		all_favorites = MyFavorite.where(:boat_id => @boat.id)
 		all_favorites.each do |favorite|
 			favorite.destroy
-		end 
+		end
 		@boat.destroy
 		redirect_to boats_path, notice: "Your boat has been deleted"
 	end
@@ -83,7 +83,7 @@ class BoatsController < ApplicationController
 			end
 		end
 
-		def my_favorites	# Getting back my favorite boats
+		def my_favorites # Getting back my favorite boats
 			if @current_user
 				@my_favorites = MyFavorite.where(:user_id => @current_user.id)
 

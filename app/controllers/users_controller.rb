@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
 
-	before_action :set_user
-
 	def show
 	end
 
@@ -22,7 +20,7 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		if @user.update_attributes(user_params)
+		if current_user.update_attributes(user_params)
 			redirect_to user_path, notice: "Your user profile has been updated"
 		else
 			render 'edit'
@@ -30,10 +28,6 @@ class UsersController < ApplicationController
 	end
 
 	private
-
-		def set_user
-			@user = @current_user
-		end
 
 		def user_params
 			params.require(:user).permit(:name, :email)

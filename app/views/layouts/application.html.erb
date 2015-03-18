@@ -12,8 +12,12 @@
 
 <div class="container">
 	<%= render '/partials/flash' %>
+	
+	<div class="col-2">
+		<%= link_to "Back", :back, :class => "btn btn-default" %>
+	</div>
 
-	<%= render '/partials/menu', :current_user => @current_user %>
+	<%= render '/partials/menu', :current_user => current_user %>
 
 	<div class="clearfix"></div>
 

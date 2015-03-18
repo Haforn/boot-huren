@@ -11,19 +11,19 @@ class BoatsController < ApplicationController
 	end
 
 	def my_boats
-		@my_boats = Boat.where(:user_id => @current_user.id)
+		@my_boats = Boat.where(:user_id => current_user.id)
 	end
 
 	def show
 		@my_favorite = MyFavorite.new
 	end
 
-	def add_as_favorite 
+	def add_as_favorite
 		if @is_in_favorites.length == 0
-			@my_favorite = MyFavorite.new(:user_id => @current_user.id, :boat_id => @boat.id)
+			@my_favorite = MyFavorite.new(:user_id => current_user.id, :boat_id => @boat.id)
 			@my_favorite.save
 		else
-			@my_favorites = MyFavorite.where(:user_id => @current_user.id, :boat_id => @boat.id)
+			@my_favorites = MyFavorite.where(:user_id => current_user.id, :boat_id => @boat.id)
 			@my_favorites.each do |favorite|
 				favorite.destroy
 			end
@@ -62,7 +62,7 @@ class BoatsController < ApplicationController
 		all_favorites = MyFavorite.where(:boat_id => @boat.id)
 		all_favorites.each do |favorite|
 			favorite.destroy
-		end 
+		end
 		@boat.destroy
 		redirect_to boats_path, notice: "Your boat has been deleted"
 	end
@@ -74,18 +74,18 @@ class BoatsController < ApplicationController
 		end
 
 		def boat_params
-			params.require(:boat).permit(:title).merge(user_id: @current_user.id)
+			params.require(:boat).permit(:title).merge(user_id: current_user.id)
 		end
 
 		def check_if_owner
-			if @current_user.id != @boat.user_id
+			if current_user.id != @boat.user_id
 				redirect_to my_boats_path, notice: "Only edit your own boats"
 			end
 		end
 
-		def my_favorites	# Getting back my favorite boats
-			if @current_user
-				@my_favorites = MyFavorite.where(:user_id => @current_user.id)
+		def my_favorites # Getting back my favorite boats
+			if current_user
+				@my_favorites = MyFavorite.where(:user_id => current_user.id)
 
 				@my_favorite_array = Array.new
 
@@ -98,8 +98,8 @@ class BoatsController < ApplicationController
 		end
 
 		def check_if_in_favorites
-			if @current_user
-				@is_in_favorites = MyFavorite.where(:user_id => @current_user.id, :boat_id => @boat.id)
+			if current_user
+				@is_in_favorites = MyFavorite.where(:user_id => current_user.id, :boat_id => @boat.id)
 			end
 		end
 end

@@ -4,7 +4,6 @@ class AccessController < ApplicationController
 
 	def login
 		# login form
-		@user = @current_user
 		if session[:user_id]
 			redirect_to boats_path
 		end

@@ -12,7 +12,7 @@ class MyFavoritesController < ApplicationController
 	private
 
 		def my_favorite_params
-			params.require(:my_favorite).permit().merge(user_id: @current_user.id, boat_id: @boat.id)
+			params.require(:my_favorite).permit().merge(user_id: current_user.id, boat_id: @boat.id)
 		end
 
 end

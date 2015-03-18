@@ -78,7 +78,7 @@ class BoatsController < ApplicationController
 		end
 
 		def check_if_owner
-			if !current_user.boats
+			if current_user.id != @boat.user_id
 				redirect_to my_boats_path, notice: "Only edit your own boats"
 			end
 		end

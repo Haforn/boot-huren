@@ -11,7 +11,8 @@ class BoatsController < ApplicationController
 	end
 
 	def my_boats
-		@my_boats = Boat.where(:user_id => current_user.id)
+		@my_boats = current_user.boats
+		#Boat.where(:user_id => current_user.id)
 	end
 
 	def show
@@ -85,7 +86,9 @@ class BoatsController < ApplicationController
 
 		def my_favorites # Getting back my favorite boats
 			if current_user
-				@my_favorites = MyFavorite.where(:user_id => current_user.id)
+				@my_favorites = current_user.my_favorites
+
+				#MyFavorite.where(:user_id => current_user.id)
 
 				@my_favorite_array = Array.new
 
@@ -99,7 +102,7 @@ class BoatsController < ApplicationController
 
 		def check_if_in_favorites
 			if current_user
-				@is_in_favorites = MyFavorite.where(:user_id => current_user.id, :boat_id => @boat.id)
+				@is_in_favorites = current_user.my_favorites.where(:boat_id => @boat.id)
 			end
 		end
 end

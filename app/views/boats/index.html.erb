@@ -16,3 +16,12 @@
 
 <%= render 'my_favorites'%>
 
+<% if session[:recent_seen] %>
+<div class="col-2">
+	<ul>
+		<% @recent_seen.each do |recent_seen| %>
+			<li><%= recent_seen.title %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>

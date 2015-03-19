@@ -1,18 +1,28 @@
 class BoatsController < ApplicationController
 
+	# User check #
 	before_action :confirm_logged_in, except: [:show, :index]
-	before_action :set_boat, except: [:index, :my_boats, :new, :create]
 	before_action :check_if_owner, only: [:edit, :update, :delete, :destroy]
+
+	# Boats #
+	before_action :set_boat, except: [:index, :my_boats, :new, :create]
+	
+	# My Favorites #
 	before_action :my_favorites, only: [:index, :my_boats]
 	before_action :check_if_in_favorites, only: [:add_as_favorite, :show]
 
+	# Recent seen #
+	before_action :recent_seen, only: [:show]
+
 	def index
 		@boats = Boat.all
+		if session[:recent_seen]
+			@recent_seen = Boat.find(session[:recent_seen])
+		end
 	end
 
 	def my_boats
 		@my_boats = current_user.boats
-		#Boat.where(:user_id => current_user.id)
 	end
 
 	def show
@@ -77,18 +87,10 @@ class BoatsController < ApplicationController
 		def boat_params
 			params.require(:boat).permit(:title).merge(user_id: current_user.id)
 		end
-
-		def check_if_owner
-			if current_user.id != @boat.user_id
-				redirect_to my_boats_path, notice: "Only edit your own boats"
-			end
-		end
-
+		
 		def my_favorites # Getting back my favorite boats
 			if current_user
 				@my_favorites = current_user.my_favorites
-
-				#MyFavorite.where(:user_id => current_user.id)
 
 				@my_favorite_array = Array.new
 
@@ -97,6 +99,28 @@ class BoatsController < ApplicationController
 				end
 
 				@my_favorite_boats = Boat.find(@my_favorite_array)
+			end
+		end
+
+		def recent_seen
+
+			if session[:recent_seen] 
+				
+				if session[:recent_seen].count(@boat.id) == 0 
+					(session[:recent_seen] ||= []) << @boat.id
+					if session[:recent_seen].count > 5
+						session[:recent_seen].slice!(0, 1)
+					end
+				end
+				
+			else
+				(session[:recent_seen] ||= []) << @boat.id
+			end
+		end
+		
+		def check_if_owner
+			if current_user.id != @boat.user_id
+				redirect_to my_boats_path, notice: "Only edit your own boats"
 			end
 		end
 

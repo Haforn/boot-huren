@@ -1,11 +1,11 @@
 class BoatsController < ApplicationController
 
+	# Boats #
+	before_action :set_boat, except: [:index, :my_boats, :new, :create]
+
 	# User check #
 	before_action :confirm_logged_in, except: [:show, :index]
 	before_action :check_if_owner, only: [:edit, :update, :delete, :destroy]
-
-	# Boats #
-	before_action :set_boat, except: [:index, :my_boats, :new, :create]
 	
 	# My Favorites #
 	before_action :my_favorites, only: [:index, :my_boats]

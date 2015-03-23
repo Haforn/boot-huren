@@ -1,7 +1,11 @@
 <% if !flash[:notice].blank? %>
-	<div class="col-2">
-		<p class="notice">
-			<%= flash[:notice] %>
-		</p>
-	</div>
+	<p class="notice">
+		<%= flash[:notice] %>
+	</p>
+<% end %>
+
+<% if !flash[:notice_fail].blank? %>
+	<p class="notice fail">
+		<%= flash[:notice_fail] %>
+	</p>
 <% end %>

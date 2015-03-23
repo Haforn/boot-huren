@@ -1,4 +1,6 @@
-<%= form_for current_user do |f| %>
+<%= error_messages_for(@user) %>
+
+<%= form_for @user do |f| %>
 
 	<div class="form-group">
 		<%= f.label :name %>
@@ -8,6 +10,16 @@
 	<div class="form-group">
 		<%= f.label :email %>
 		<%= f.email_field :email, :class => 'form-control' %>
+	</div>
+
+	<div class="form-group">
+		<%= f.label :username %>
+		<%= f.text_field :username, :class => 'form-control' %> 
+	</div>
+
+	<div class="form-group">
+		<%= f.label :password %>
+		<%= f.password_field :password, :class => 'form-control' %> 
 	</div>
 
 	<%= f.submit 'Profiel updaten', :class => 'btn btn-default' %>

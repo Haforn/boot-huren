@@ -20,16 +20,17 @@ class AccessController < ApplicationController
   		# mark user as logged in
       session[:user_id] = authorired_user.id
       session[:username] = authorired_user.username
-  		redirect_to boats_path
+  		redirect_to boats_path, notice: "Your logged in"
   	else
   		redirect_to login_path
+      flash[:notice_fail] = "Invalid username/password combination"
   	end
   end
 
   def logout
     session[:user_id] = nil
     session[:username] = nil
-    redirect_to boats_path
+    redirect_to boats_path, notice: "Your logged out"
   end
 
 end

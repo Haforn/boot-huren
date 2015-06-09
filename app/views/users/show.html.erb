@@ -4,15 +4,20 @@
 
 <div class="col-2">
 	<p>
-		Actief sinds: <%= current_user.created_at %>
+		Actief sinds: <%= current_user.created_at.strftime "%d/%m/%Y %H:%M" %>
 	</p>
 
 	<ul>
-		<li>
-			<%= current_user.name %>
-		</li>
+		<% if current_user.name %>
+			<li>
+				<%= current_user.name %>
+			</li>
+		<% end %>
 		<li>
 			<%= current_user.email %>
+		</li>
+		<li>
+			<%= current_user.username %>
 		</li>
 	</ul>
 </div>
@@ -23,12 +28,17 @@
 	<p>
 
 	<ul>
-		<li>
-			<% #TODO set adres %>
-		</li>
-		<li>
-			<% #TODO set postal_code %>
-		</li>
+		<% if current_user.street && current_user.house_number %>
+			<li>
+				<%= current_user.street %> <%= current_user.house_number %>
+			</li>
+		<% end %>
+
+		<% if current_user.zip_code && current_user.residence %>
+			<li>
+				<%= current_user.zip_code %> <%= current_user.residence %>
+			</li>
+		<% end %>
 	</ul>
 </div>
 

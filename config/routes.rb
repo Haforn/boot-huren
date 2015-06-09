@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/boats/:id/add_as_favorite', to: 'boats#add_as_favorite', as: 'add_as_favorite'
 
   resources :users, except: [:destroy, :index]
-
+ 
   get '/login', to: 'access#login', as: 'login'
   get '/logout', to: 'access#logout', as: 'logout'
 

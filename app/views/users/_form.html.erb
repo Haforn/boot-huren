@@ -1,27 +1,45 @@
 <%= error_messages_for(@user) %>
 
 <%= form_for @user do |f| %>
+	<div class="col-2">
+		<div class="form-group">
+			<%= f.label :name %>
+			<%= f.text_field :name, :class => 'form-control' %>
+		</div>
 
-	<div class="form-group">
-		<%= f.label :name %>
-		<%= f.text_field :name, :class => 'form-control' %>
+		<div class="form-group">
+			<%= f.label :email %>
+			<%= f.email_field :email, :class => 'form-control' %>
+		</div>
+
+		<div class="form-group">
+			<%= f.label :username %>
+			<%= f.text_field :username, :class => 'form-control' %> 
+		</div>
+
+		<div class="form-group">
+			<%= f.label :password, "Confirm with your password" %>
+			<%= f.password_field :password, :class => 'form-control' %> 
+		</div>
 	</div>
 
-	<div class="form-group">
-		<%= f.label :email %>
-		<%= f.email_field :email, :class => 'form-control' %>
+	<div class="col-2">
+		<div class="form-group clearfix">
+			<%= f.label :street, "Street and number" %>
+			<%= f.text_field :street, :class => 'form-control form-left' %>
+			<%= f.text_field :house_number, :class => 'form-control form-left form-number' %> 
+		</div> 
+
+		<div class="form-group">
+			<%= f.label :zip_code %>
+			<%= f.text_field :zip_code, :class => 'form-control' %> 
+		</div>
+
+		<div class="form-group">
+			<%= f.label :residence %>
+			<%= f.text_field :residence, :class => 'form-control' %>
+		</div>
+
+		<%= f.submit 'Profiel updaten', :class => 'btn btn-default' %>
 	</div>
-
-	<div class="form-group">
-		<%= f.label :username %>
-		<%= f.text_field :username, :class => 'form-control' %> 
-	</div>
-
-	<div class="form-group">
-		<%= f.label :password %>
-		<%= f.password_field :password, :class => 'form-control' %> 
-	</div>
-
-	<%= f.submit 'Profiel updaten', :class => 'btn btn-default' %>
-
 <% end %>
